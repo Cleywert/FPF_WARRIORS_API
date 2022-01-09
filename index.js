@@ -17,8 +17,6 @@ app.use(cors());
 // setando o body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// definindo pasta de midias estáticas
-app.use(express.static("public"));
 
 // importando controllers
 // os models de cada controller é importado dentro do mesmo e será executado
@@ -26,6 +24,6 @@ const ControllerUser = require("./controllers/controllerUser");
 app.use("/", ControllerUser)
 
 // Setando porta da aplicação
-app.listen(8000, () => {
+app.listen(8001, () => {
     console.log("Servidor rodando");
 })
