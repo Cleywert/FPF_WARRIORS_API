@@ -25,5 +25,5 @@ app.use("/", ControllerUser)
 
 // Setando porta da aplicação
 app.listen(8001, () => {
-    console.log("Servidor rodando");
+    console.log("rodando na porta 8001");
 })
