@@ -40,14 +40,34 @@ router.get("/user/:name/:senha", (req, res) => {
         if (user.senha == senha) {
             res.status(200);
             res.json(user);
-        }else{
+        } else {
             res.status(200);
-            res.send({message: "Senha incorreta"})
+            res.send({ message: "Senha incorreta" })
         }
     }).catch(() => {
         res.status(200);
-        res.send({message: "User name não encontrado"})
+        res.send({ message: "User name não encontrado" })
     })
-})
+});
+
+// UPDATE USUÁRIO
+router.put("/user/:name", (req, res) => {
+    const { name } = req.params;
+    const { ultimos, favoritos, score } = req.body;
+
+    User.update(
+        {
+            score,
+            ultimos,
+            favoritos
+        },
+        { where: { name } }
+    ).then(() => {
+        res.status(200);
+        User.findOne({where: {name}}).then(user => {
+            res.json(user)
+        })
+    })
+});
 
 module.exports = router;
