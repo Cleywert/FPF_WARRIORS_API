@@ -18,12 +18,25 @@ router.post("/user", (req, res) => {
     })
 });
 
+// LISTA TODOS OS USUÁRIOS PARA RANKING
+router.get("/users/ranking", (req,res) => {
+    User.findAll({
+        order: [
+            ['score', 'DESC']
+        ]
+    }).then(users => {
+        res.status(200);
+        res.json(users);
+    })
+});
+
 // BUSCA UM USUÁRIO POR NOME
 router.get("/user/:name", (req, res) => {
     const { name } = req.params;
 
     User.findOne({
-        where: { name }
+        where: { name },
+        attributes: ['name', 'score', 'ultimos', 'favoritos']
     }).then(user => {
         res.status(200);
         res.json(user);
@@ -35,7 +48,7 @@ router.get("/user/:name/:senha", (req, res) => {
     const { name, senha } = req.params;
 
     User.findOne({
-        where: { name }
+        where: { name },
     }).then(user => {
         if (user.senha == senha) {
             res.status(200);
