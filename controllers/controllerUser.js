@@ -36,7 +36,7 @@ router.get("/user/:name", (req, res) => {
 
     User.findOne({
         where: { name },
-        attributes: ['name', 'score', 'ultimos', 'favoritos']
+        attributes: ['name', 'score', 'favoritos']
     }).then(user => {
         res.status(200);
         res.json(user);
@@ -66,12 +66,11 @@ router.get("/user/:name/:senha", (req, res) => {
 // UPDATE USUÁRIO
 router.put("/user/:name", (req, res) => {
     const { name } = req.params;
-    const { ultimos, favoritos, score } = req.body;
+    const { favoritos, score } = req.body;
 
     User.update(
         {
             score,
-            ultimos,
             favoritos
         },
         { where: { name } }

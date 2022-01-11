@@ -19,12 +19,8 @@ const User = conn.define("user", {
         type: Sequelize.STRING,
         allowNull: true
     },
-    ultimos: {
-        type: Sequelize.STRING,
-        allowNull: true
-    }
 });
 
-// User.sync({force: true}).then(() => {console.log("Tabela de usuários criada")});
+User.sync({force: true}).then(() => {console.log("Tabela de usuários criada")});
 
 module.exports = User
